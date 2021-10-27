@@ -1,0 +1,26 @@
+[
+  {
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "secretOptions": null,
+      "options": {
+        "awslogs-group": "/ecs/reactapp-task-definition",
+        "awslogs-region": "ap-southeast-1",
+        "awslogs-stream-prefix": "ecs"
+      }
+    },
+    "essential": true,
+    "memory": 300,
+    "name": "main_reactapp_container",
+    "cpu": 255,
+
+    "image": "${REPOSITORY_URL}:${IMAGE_TAG}",
+    "portMappings": [
+      {
+        "hostPort": 0,
+        "protocol": "tcp",
+        "containerPort": 80
+      }
+    ]
+  }
+]
