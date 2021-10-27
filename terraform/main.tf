@@ -6,7 +6,6 @@ module keypair {
 module iam {
   source = "./iam_module"
   ASSUME_ROLE_POLICY = "./policies/ec2_assume_role_policy.json"
-  S3_FULL_ACCESS_POLICY = "./policies/s3_full_access_policy.json"
   ECS_SERVICE_ASSUME_ROLE_POLICY = "./policies/ecs_service_assume_role_policy.json"
   ECS_EC2_ROLE_POLICY = "./policies/ecs_ec2_role_policy.json"
 }
