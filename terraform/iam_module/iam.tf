@@ -8,13 +8,6 @@ resource "aws_iam_instance_profile" "ec2_instance_profile" {
   role = aws_iam_role.ec2_instance_role.name
 }
 
-# s3 full access policy
-resource "aws_iam_role_policy" "s3_full_access_policy" {
-  name = "s3_full_access_policy"
-  role = aws_iam_role.ec2_instance_role.id
-  policy  = "${file(var.S3_FULL_ACCESS_POLICY)}"
-}
-
 # ecs service role
 resource "aws_iam_role" "ecs_service_role" {
   name = "ecs_service_role"
