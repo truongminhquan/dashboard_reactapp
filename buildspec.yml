@@ -13,7 +13,7 @@ phases:
         - touch backend.tf
         - echo "terraform { " >> backend.tf
         - echo "   backend \"s3\" { " >> backend.tf
-        - echo "   bucket = \"practice-terraform-state-quantm15\"" >> backend.tf
+        - echo "   bucket = \"ecs-terraform-state-quantm15\"" >> backend.tf
         - echo "   key    = \"terraform/state-file\"" >> backend.tf
         - echo "   region = \"ap-southeast-1\"" >> backend.tf
         - echo "  }" >> backend.tf
