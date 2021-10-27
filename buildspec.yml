@@ -1,8 +1,6 @@
 version: 0.2
 run-as: root
 
-
-
 phases:
     install:
       commands:
@@ -20,7 +18,8 @@ phases:
         - echo "  }" >> backend.tf
         - echo "}" >> backend.tf
         - terraform init
-        - terraform apply --target module.ecr.aws_ecr_repository.demo_ecr_reactapp -auto-approve
+        # - terraform apply --target module.ecr.aws_ecr_repository.demo_ecr_reactapp -auto-approve
+        - terraform destroy -auto-approve
 #   pre_build:
 #     commands:
 #       - echo Logging in to Amazon ECR...
