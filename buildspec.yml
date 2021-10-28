@@ -18,7 +18,7 @@ phases:
         - echo "  }" >> backend.tf
         - echo "}" >> backend.tf
         - terraform init
-        - terraform apply --target module.ecr.aws_ecr_repository.demo_ecr_reactapp -auto-approve
+        - terraform apply --target module.ecr.aws_ecr_repository.demo_ecr_reactapp -var="DOCKER_IMAGE_TAG=$IMAGE_TAG" -auto-approve
         # - terraform apply -auto-approve
         - cd ../
         # - terraform destroy -auto-approve
@@ -43,6 +43,6 @@ phases:
         - echo Writing image definitions file...
         - printf '[{"name":"%s","imageUri":"%s"}]' $CONTAINER_NAME $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
         - cd terraform
-        - terraform apply -var="DOCKER_IMAGE_TAG=$IMAGE_TAG" -auto-approve
+        - terraform apply -auto-approve
 artifacts:
     files: imagedefinitions.json
