@@ -8,45 +8,45 @@ run-as: root
 phases:
     install:
       commands:
-        # - apt-get update && apt-get install -y gnupg software-properties-common curl
-        # - curl -fsSL https://apt.releases.hashicorp.com/gpg | apt-key add -
-        # - apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
-        # - apt-get update && apt-get install terraform
-        # - cd terraform
-        # - touch backend.tf
-        # - echo "terraform { " >> backend.tf
-        # - echo "   backend \"s3\" { " >> backend.tf
-        # - echo "   bucket = \"ecs-terraform-state-quantm15\"" >> backend.tf
-        # - echo "   key    = \"terraform/state-file\"" >> backend.tf
-        # - echo "   region = \"ap-southeast-1\"" >> backend.tf
-        # - echo "  }" >> backend.tf
-        # - echo "}" >> backend.tf
-        # - terraform init
-        # - terraform apply --target module.ecr.aws_ecr_repository.demo_ecr_reactapp -var="DOCKER_IMAGE_TAG=${IMAGE_TAG}" -auto-approve
+        - apt-get update && apt-get install -y gnupg software-properties-common curl
+        - curl -fsSL https://apt.releases.hashicorp.com/gpg | apt-key add -
+        - apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+        - apt-get update && apt-get install terraform
+        - cd terraform
+        - touch backend.tf
+        - echo "terraform { " >> backend.tf
+        - echo "   backend \"s3\" { " >> backend.tf
+        - echo "   bucket = \"ecs-terraform-state-quantm15\"" >> backend.tf
+        - echo "   key    = \"terraform/state-file\"" >> backend.tf
+        - echo "   region = \"ap-southeast-1\"" >> backend.tf
+        - echo "  }" >> backend.tf
+        - echo "}" >> backend.tf
+        - terraform init
+        - terraform apply --target module.ecr.aws_ecr_repository.demo_ecr_reactapp -var="DOCKER_IMAGE_TAG=${IMAGE_TAG}" -auto-approve
         # - terraform apply -auto-approve
-        # - cd ../
+        - cd ../
         # - terraform destroy -auto-approve
-        - echo $IMAGE_TAG
-#     pre_build:
-#       commands:
-#         - echo Logging in to Amazon ECR...
-#         - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
-#         - REPOSITORY_URI=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME
-#     build:
-#       commands:
-#         - echo Build started on `date`
-#         - echo Building the Docker image... 
-#         - npm install
-#         - npm run build         
-#         - docker build -t $IMAGE_REPO_NAME:$IMAGE_TAG .
-#         - docker tag $IMAGE_REPO_NAME:$IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG      
-#     post_build:
-#       commands:
-#         - echo Build completed on `date`
-#         - echo Pushing the Docker image...
-#         - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
-#         - echo Writing image definitions file...
-#         - printf '[{"name":"%s","imageUri":"%s"}]' $CONTAINER_NAME $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
+        # - echo $IMAGE_TAG
+    pre_build:
+      commands:
+        - echo Logging in to Amazon ECR...
+        - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
+        - REPOSITORY_URI=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME
+    build:
+      commands:
+        - echo Build started on `date`
+        - echo Building the Docker image... 
+        - npm install
+        - npm run build         
+        - docker build -t $IMAGE_REPO_NAME:$IMAGE_TAG .
+        - docker tag $IMAGE_REPO_NAME:$IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG      
+    post_build:
+      commands:
+        - echo Build completed on `date`
+        - echo Pushing the Docker image...
+        - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
+        - echo Writing image definitions file...
+        - printf '[{"name":"%s","imageUri":"%s"}]' $CONTAINER_NAME $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
 #         - cd terraform
 #         - terraform apply -var="DOCKER_IMAGE_TAG=${IMAGE_TAG}" -auto-approve
 # artifacts:
