@@ -43,6 +43,6 @@ phases:
         - echo Writing image definitions file...
         - printf '[{"name":"%s","imageUri":"%s"}]' $CONTAINER_NAME $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
         - cd terraform
-        - terraform apply -auto-approve
+        - terraform apply -var="DOCKER_IMAGE_TAG=$IMAGE_TAG" -auto-approve
 artifacts:
     files: imagedefinitions.json

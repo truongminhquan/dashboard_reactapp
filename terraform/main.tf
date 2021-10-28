@@ -33,7 +33,8 @@ module ecr {
 module task_definition {
   source = "./task_definition_module"
   REPOSITORY_URL = module.ecr.demo_ecr_reactapp_repository_url
-  IMAGE_TAG = 1
+  # IMAGE_TAG = 1
+  IMAGE_TAG = var.DOCKER_IMAGE_TAG
   TASK_DEFINITION_TEMPLATE_PATH = "task_definition_template/reactapp_task_definition.json"
 }
 
