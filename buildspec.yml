@@ -25,7 +25,7 @@ phases:
         # - terraform apply --target module.ecr.aws_ecr_repository.demo_ecr_reactapp -var="DOCKER_IMAGE_TAG=${IMAGE_TAG}" -auto-approve
         # - terraform apply -auto-approve
         # - cd ../
-        - terraform destroy -auto-approve
+        - terraform destroy -var="DOCKER_IMAGE_TAG=${IMAGE_TAG}" -auto-approve
         - echo $IMAGE_TAG
     # pre_build:
     #   commands:
