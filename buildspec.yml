@@ -1,31 +1,31 @@
 version: 0.2
 run-as: root
 
-env:
-    variables:
-      IMAGE_TAG: 2
+# env:
+#     variables:
+#       IMAGE_TAG: 2
 
 phases:
     install:
       commands:
-        - apt-get update && apt-get install -y gnupg software-properties-common curl
-        - curl -fsSL https://apt.releases.hashicorp.com/gpg | apt-key add -
-        - apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
-        - apt-get update && apt-get install terraform
-        - cd terraform
-        - touch backend.tf
-        - echo "terraform { " >> backend.tf
-        - echo "   backend \"s3\" { " >> backend.tf
-        - echo "   bucket = \"ecs-terraform-state-quantm15\"" >> backend.tf
-        - echo "   key    = \"terraform/state-file\"" >> backend.tf
-        - echo "   region = \"ap-southeast-1\"" >> backend.tf
-        - echo "  }" >> backend.tf
-        - echo "}" >> backend.tf
-        - terraform init
+        # - apt-get update && apt-get install -y gnupg software-properties-common curl
+        # - curl -fsSL https://apt.releases.hashicorp.com/gpg | apt-key add -
+        # - apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+        # - apt-get update && apt-get install terraform
+        # - cd terraform
+        # - touch backend.tf
+        # - echo "terraform { " >> backend.tf
+        # - echo "   backend \"s3\" { " >> backend.tf
+        # - echo "   bucket = \"ecs-terraform-state-quantm15\"" >> backend.tf
+        # - echo "   key    = \"terraform/state-file\"" >> backend.tf
+        # - echo "   region = \"ap-southeast-1\"" >> backend.tf
+        # - echo "  }" >> backend.tf
+        # - echo "}" >> backend.tf
+        # - terraform init
         # - terraform apply --target module.ecr.aws_ecr_repository.demo_ecr_reactapp -var="DOCKER_IMAGE_TAG=${IMAGE_TAG}" -auto-approve
         # - terraform apply -auto-approve
-        - cd ../
-        - terraform destroy -auto-approve
+        # - cd ../
+        # - terraform destroy -auto-approve
         - echo $IMAGE_TAG
 #     pre_build:
 #       commands:
