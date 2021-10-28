@@ -3,7 +3,7 @@ run-as: root
 
 # env:
 #     variables:
-#       IMAGE_TAG: 2
+#       DOCKER_IMAGE_TAG: !e "IMAGE_TAG == -1 ? CODEBUILD_BUILD_NUMBER"
 
 phases:
     install:
@@ -47,7 +47,7 @@ phases:
         - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
         - echo Writing image definitions file...
         - printf '[{"name":"%s","imageUri":"%s"}]' $CONTAINER_NAME $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
-#         - cd terraform
-#         - terraform apply -var="DOCKER_IMAGE_TAG=${IMAGE_TAG}" -auto-approve
-# artifacts:
-#     files: imagedefinitions.json
+        - cd terraform
+        - terraform apply -var="DOCKER_IMAGE_TAG=${IMAGE_TAG}" -auto-approve
+artifacts:
+    files: imagedefinitions.json
